@@ -2,8 +2,12 @@
 
 # dependencies
 /node_modules
+/.firebase
 /.pnp
 .pnp.js
+/package-lock.json
+/.gitignore
+/.idea
 
 # testing
 /coverage
