@@ -1,32 +1,7 @@
 import {ERROR, GET_PROJECTS, LOADING_PROJECTS} from "../actionTypes/projects";
 
 const initialState = {
-    projects: [
-            {
-                id:"1",
-                title:"Crop Image",
-                description:"Test Descr",
-                votedByMe:true,
-            },
-            {
-                id:"2",
-                title:"Canvas",
-                description:"Test Descr",
-                votedByMe:false,
-            },
-            {
-                id:"3",
-                title:"Qwert",
-                description:"Testing",
-                votedByMe:false,
-            },
-            {
-                id:"4",
-                title:"zxc",
-                description:"asdasd",
-                votedByMe:false,
-            }
-        ],
+    projects: [],
     isLoading: false,
     error: false
 }

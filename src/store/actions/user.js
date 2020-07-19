@@ -45,13 +45,11 @@ export const updateProfile = (req,token,historyPush) => {
             dispatch(loading(false))
             return response;
         }).then(({data}) => {
-            console.log(data)
             delete data.token
             dispatch(UpdateUser(data))
             historyPush("/home")
         })
         .catch((err) => {
-            console.log(err)
             dispatch(loading(false))
             historyPush("/home")
             notification.warning({
@@ -124,7 +122,6 @@ export const getUser = (data) => {
 }
 
 export const UpdateUser = (data) => {
-    console.log("data",data)
     return {
         type: UPDATE_PROFILE,
         payload: {...data}

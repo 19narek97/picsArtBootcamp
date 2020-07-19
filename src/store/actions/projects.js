@@ -32,7 +32,6 @@ export const fetchDataProjects = () => {
 export const voteProject = (id,likeOrUnlike) => {
     return (dispatch) => {
         let token = localStorage.getItem("token");
-        console.log({type:likeOrUnlike})
         axios.post(`api/v1/projects/${id}/voting`,{type:likeOrUnlike},{ headers: {
                 token
             }})

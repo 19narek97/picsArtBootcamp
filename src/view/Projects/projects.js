@@ -2,6 +2,7 @@ import React from "react";
 import {fetchDataProjects,voteProject} from "../../store/actions/projects";
 import {connect} from "react-redux";
 import ListProjects from "./listProjects";
+import {Spin} from "antd";
 
 class Projects extends React.Component{
 
@@ -16,11 +17,13 @@ class Projects extends React.Component{
     }
 
     render() {
-        let {projects} = this.props;
+        let {projects,isLoading} = this.props;
         return (
             <div>
                 <h1 style={{color:'#4097fc'}} align="center">Projects</h1>
-                <ListProjects votedMe={this.vote} list={projects}/>
+                
+                {isLoading ? <Spin /> :<ListProjects votedMe={this.vote} list={projects}/>}
+
             </div>
         )
     }

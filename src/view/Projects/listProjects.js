@@ -23,7 +23,10 @@ const ListProjects = (props) => {
                     <List.Item >
                         <List.Item.Meta
                             title={<span>{item.title}
-                                        <span className="float-right">
+                                        <span style={{display:"flex"}} className="float-right">
+                                            <strong style={{'marginTop': '5px',
+                                                            'fontSize': '17px',
+                                                            'marginRight': '5px'}}>{item.votingsCount}</strong>
                                             <img  onClick={() => props.votedMe(item)}
                                                   onMouseOver={(e) => hoverImg(e,"move",item.votedByMe)}
                                                   onMouseOut={(e) => hoverImg(e,"out",item.votedByMe)}
