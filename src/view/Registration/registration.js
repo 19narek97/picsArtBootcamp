@@ -40,7 +40,7 @@ class Registration extends React.Component {
                 user.avatarUrl = downloadURL;
                 user.birthDate = birthDate;
 
-                axios.post('apid/v1/users/register', {...user}).then((response) => {
+                axios.post('api/v1/users/register', {...user}).then((response) => {
                     if (response.status !== 200) {
                         errorMsg.hasError = true;
                         errorMsg.msg = "Please try again, request was not sent successfully";
