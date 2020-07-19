@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row } from 'react-bootstrap';
 import withAuthentication from '../../hoc/withAuthentication'
-import {Header} from "../header/header"
+import Header from "../header/header"
 
 class UserLayout extends React.Component{
 

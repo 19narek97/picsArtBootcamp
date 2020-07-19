@@ -1,0 +1,73 @@
+.todolist{
+    background-color:#FFF;
+    padding:20px 20px 10px 20px;
+    margin-top:30px;
+    border: 2px solid #c1c1c1;
+    border-radius: 49px;
+}
+.todolist h1{
+    margin:0;
+    padding-bottom:20px;
+    text-align:center;
+}
+
+.itemTopic:hover{
+    color:black;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #c3e6cb;
+}
+
+.listTopics{
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.vote{
+    font-weight: bold;
+    font-size: 25px;
+    margin-right: 7px;
+}
+
+.voteLikeImage{
+    margin-top: 4px;
+}
+
+
+.voteDeleteImage{
+    margin-top: 4px;
+}
+
+.topics{
+    display: flex;
+}
+
+.form-control{
+    border-radius:0;
+}
+li.ui-state-default{
+    background:#fff;
+    border:none;
+    border-bottom:1px solid #ddd;
+}
+
+li.ui-state-default:last-child{
+    border-bottom:none;
+}
+
+.todo-footer{
+    background-color:#F4FCE8;
+    margin:0 -20px -10px -20px;
+    padding: 10px 20px;
+}
+#done-items li{
+    padding:10px 0;
+    border-bottom:1px solid #ddd;
+    text-decoration:line-through;
+}
+#done-items li:last-child{
+    border-bottom:none;
+}
+#checkAll{
+    margin-top:10px;
+}

@@ -1,7 +1,9 @@
-import {GET_USER,LOADING_DATA,ERROR} from "../actionTypes/user"
+import {GET_USER,LOADING_DATA,ERROR,UPDATE_PROFILE} from "../actionTypes/user"
 
 const initialState = {
-    user: {},
+    user: {
+
+    },
     isLoading: false,
     error: false
 }
@@ -10,11 +12,15 @@ const UserReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_USER:
             return {
-                ...state, userInfo: {...action.payload}
+                ...state, user: {...action.payload}
             };
         case LOADING_DATA:
             return {
                 ...state,isLoading:action.payload
+            };
+        case UPDATE_PROFILE:
+            return {
+                ...state,user:{...state.user,...action.payload}
             };
         case ERROR:
             return {

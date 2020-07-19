@@ -15,7 +15,6 @@ const withAuthentication = condition => Component => {
         }
 
         componentDidMount() {
-            console.log("22",this.userToken)
             this.props.onAuthUser(this.userToken);
         }
 

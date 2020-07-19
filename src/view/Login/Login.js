@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import Alert from "react-bootstrap/Alert";
 import {loginUser} from "../../store/actions/user";
 import {connect} from "react-redux"
+import { Redirect } from "react-router-dom";
 
 class Login extends React.Component{
 
@@ -13,7 +14,14 @@ class Login extends React.Component{
     };
 
     render() {
-        let {isLoading,hasError} = this.props;
+        let {isLoading,hasError} = this.props,
+            token = localStorage.getItem("token");
+
+
+        if(token){
+            return <Redirect to={'/home'}/>
+        }
+
         return (
             <>
                 <Formik

@@ -1,4 +1,4 @@
-import {GET_USER, LOADING_DATA, ERROR} from "../actionTypes/user"
+import {GET_USER, LOADING_DATA, ERROR,UPDATE_PROFILE} from "../actionTypes/user"
 import axios from "../../utils/request";
 import { notification } from 'antd';
 
@@ -21,11 +21,45 @@ export const onAuthUser = (token) => {
             localStorage.removeItem("token")
             dispatch(getUser({}))
             dispatch(loading(false))
-            notification.info({
+            notification.warning({
                 message: `Notification`,
                 description: 'Please enter your password and login.',
                 placement:"topRight",
             });
+        });
+    }
+}
+
+export const updateProfile = (req,token,historyPush) => {
+    return (dispatch) => {
+        dispatch(loading(true))
+        axios.put("api/v1/users/update",{...req}, {
+            headers: {
+                token
+            },
+        }).then((response) => {
+
+            if (response.status !== 200) {
+                throw Error(response.statusText);
+            }
+            dispatch(loading(false))
+            return response;
+        }).then(({data}) => {
+            console.log(data)
+            delete data.token
+            dispatch(UpdateUser(data))
+            historyPush("/home")
+        })
+        .catch((err) => {
+            console.log(err)
+            dispatch(loading(false))
+            historyPush("/home")
+            notification.warning({
+                message: `Notification`,
+                description: 'We were unable to update please try again',
+                placement: "topRight",
+            });
+
         });
     }
 }
@@ -85,6 +119,14 @@ export const loginUser =  (data, historyPush) => {
 export const getUser = (data) => {
     return {
         type: GET_USER,
+        payload: {...data}
+    }
+}
+
+export const UpdateUser = (data) => {
+    console.log("data",data)
+    return {
+        type: UPDATE_PROFILE,
         payload: {...data}
     }
 }

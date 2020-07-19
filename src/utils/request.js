@@ -1,6 +1,7 @@
 import axios from "axios";
+import {BaseUrl} from "../constants"
 
 export default axios.create({
-    baseURL: "https://picsart-bootcamp-2020-api.herokuapp.com/",
+    baseURL: BaseUrl,
     responseType: "json"
 });

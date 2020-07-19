@@ -1,15 +1,16 @@
 import React from "react";
 import {Formik, ErrorMessage, Field, Form} from "formik";
 import * as Yup from 'yup'
-import {Spin,Alert} from 'antd';
+import {Spin, Alert} from 'antd';
 import {WithUserContextFireBase} from "../../firebase";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import {connect} from "react-redux"
 import {fetchDataCompanies} from "../../store/actions/registration"
 import {Error} from "../../Components/error/error"
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import axios from "../../utils/request";
+import {notification} from "antd";
 
 class Registration extends React.Component {
 
@@ -35,25 +36,30 @@ class Registration extends React.Component {
             birthDate = date.getFullYear() + "-" + month + "-" + day;
 
         this.props.fireBase.storage.ref("avatars").child(`${new Date().getTime()}`).put(values.avatarUrl).then((snap) => {
-            snap.ref.getDownloadURL().then( (downloadURL) => {
+            snap.ref.getDownloadURL().then((downloadURL) => {
                 user.avatarUrl = downloadURL;
                 user.birthDate = birthDate;
 
-                axios.post('api/v1/users/register', {...user}).then((response) => {
+                axios.post('apid/v1/users/register', {...user}).then((response) => {
                     if (response.status !== 200) {
                         errorMsg.hasError = true;
                         errorMsg.msg = "Please try again, request was not sent successfully";
-                        this.setState({error:{...errorMsg}})
+                        this.setState({error: {...errorMsg}})
                     }
-                        return response;
-                    }).then((data) => this.props.history.push("/")).catch((err) => {
-                        errorMsg.hasError = true;
-                        errorMsg.msg = "Please try again, you could not register";
-                        this.setState({error:{...errorMsg}})
+                    return response;
+                }).then((data) => this.props.history.push("/")).catch((err) => {
+                    errorMsg.hasError = true;
+                    errorMsg.msg = "Please try again, you could not register";
+                    this.setState({error: {...errorMsg}});
+                    notification.warning({
+                        message: `Notification`,
+                        description: 'Please try again, request was not sent successfully',
+                        placement: "topRight",
                     });
+                })
 
-                });
             });
+        });
     }
 
     onChangePicture = (e, setField) => {
@@ -68,7 +74,13 @@ class Registration extends React.Component {
 
     render() {
         let {companies, isLoading, hasError} = this.props,
-            {isLoadingRequest,error} = this.state;
+            {isLoadingRequest, error} = this.state,
+            token = localStorage.getItem("token");
+
+
+        if (token) {
+            return <Redirect to={'/home'}/>
+        }
 
         if (isLoading) {
             return <Spin/>
